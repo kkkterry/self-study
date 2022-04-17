@@ -1,0 +1,11 @@
+32강. Const Pointer 예시
+
+void Output(const int* pi){
+	//*pi = 10;  불가능
+	int i = *pi;	// 가능
+	int* pInt = (int*)pi;
+	*pInt = 1000;	// 변경됨
+}
+
+int a;
+output(&a)

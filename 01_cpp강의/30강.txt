@@ -1,0 +1,22 @@
+30강.  const
+
+int main(){
+
+int i=0;
+int* pInt = &i;
+// const
+const int cint = 100;
+
+// 상수화
+// r-value(상수)
+// l-value(변수)
+
+int ii = 10;
+
+pInt = (int*)&cint;
+*pInt = 300;
+printf("cint 출력 : %d\n",cint);	// 실제 공간 cint는 300으로 변한다 하지만 const 변수로 인해서 상수로 인식되어진 상황이어서 래지스터에 값이 저장됨
+				// 값을 실제 공간에서 불러오지 않고 래지스터에서 찾아씀. (cint를 volatile로 하면 300나옴) volatile레지스터 활용 하지마라 라는 의미
+
+return 0;
+}

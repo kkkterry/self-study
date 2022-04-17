@@ -1,0 +1,120 @@
+25강. 정적변수와 외부변수
+1. 지역변수(함수):	스텍 영역
+2. 전역변수:	데이터 영역
+3. 정적변수(static):	데이터 영역
+4. 외부변수(extern):	데이터 영역
+
+- 메모리 영역
+1. 스텍영역 		
+2. 데이터 영역 		: 프로그램 시작시 생성, 프로그램 종료시 해제
+3. 읽기전용(코드, ROM)	
+4. 힙 영역		
+
+- 정적변수
+: 함부로 수정이 안되었으면, 유지보수 안정성을 위해서
+
+1. 변수가 선언된 장소에서만 영향을 미친다 -> 변수의 중복정의 문제가 발생하지 않는다.
+<func 파일>
+#include "func.h"
+
+static int g_iStatic = 0;
+
+int Add(int a, int b){
+}
+
+
+<main 파일>
+#include <stdio.h>
+#include "func.h"
+
+static int g_iStatic = 0;
+
+int main(){
+	Add(1,2);
+}
+-> 같은 이름이라도 static변수는 선언되는 위치로 구분이 되기때문에 중복정의가 문제가 되지 않음
+
+2. 정적변수를 특정함수 안에 선언해 두었을 경우 해당함수 안에서만 사용가능
+  그리고 그 함수가 종료되거나 호출될 경우 스텍메모리를 사용하지 않기 때문에 해당함수의 호출과 종료에
+   관계없이 생성 및 해제 되지 않고 유지가 되는 메모리
+
+<main 함수>
+
+g_i =0;
+
+int Test(){
+	static int i = 0;
+	++g_i;
+	++i;
+	return i;
+}
+
+int main(){
+	Test();
+	int icall = Test();  
+	
+	
+	print(%d, g_i); -> 2
+	print(%d, icall); -> 2 (static 변수 문법적 특징
+                                        -> Test 처음 선언이후 선언시마다 static int i = 0;이라는 초기화 구문이 실행되지 않는다.(최초 1번만 실행된다.)
+                                            어셈블리어까지 보면 최초 선언이후 다시 선언시 조건처리가 되어 static int i = 0;가 선언되지 않는다.
+}
+
+- 외부변수
+  <common.h>
+  #pragma once
+  
+  //정적변수
+  static int g_iStatic = 0;
+  extern int g_iExtern = 0;	// 초기값을 주면 안된다.
+  extern int g_iExtern;	// g_iExtern이라는 변수가 있을거다
+
+
+  <func.h>
+  #pragma once
+
+  int Add(int a, int b);
+  int Sub(int a, int b);
+  int Mul(int a, int b);
+
+  <func.cpp>
+  #include "func.h"
+  #include "common.h"
+  #include <stdio.h>
+
+  int Add(int a, int b){
+	printf("%d", g_iStatic);
+	printf("%d", g_iExtern);
+
+	return a+b;
+  }
+
+  int Sub(int a, int b){
+	return a-b;
+  }
+
+  int Mul(int a, int b){
+	return a*b;
+  }
+
+
+  <Test.cpp>
+  // int g_iExtern = 0; 	// -> 없을 경우 링크에서 오류가 난다.
+  int g_iExtern = 0  		// -> func. cpp or main 등의 위치에서 선언만 되어 있으면 된다.
+                                               햇깔리니까 다른 장소에 1번만 선언하면 된다.
+
+
+  <main>
+  #inlcude <stdio.h>
+  #include "func.h"
+  #include "common.h"
+
+  int main(){
+	g_iStatic = 100;
+	g_Extern = 500;
+
+	//f12 누르면 현제코드 -> 정의 -> 선언되어 있는 부분으로 이동
+	Add(0,1);  -> 실제 출력: 0 그러나 intellisense라는 디버깅 툴에서는 100으로 인식 (버그가 잇다. 2021년 초까지는)
+
+	return 0;
+  }

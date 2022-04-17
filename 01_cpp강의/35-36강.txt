@@ -1,0 +1,20 @@
+35-36강. 문자열(1-2)
+L'문자' : ''안에 있는 문자를 한개의 문자당 2byte로 취급
+문자열의 정체 : 주소값
+"abcdef"와 같은 문자열은 선언되면 코드영역에 저장됨
+
+char c = 'a';
+wchar_t wc = L'a'
+
+char szChar[10] = "abcdef";
+wchar_t szWChar[10] = L'abcdef";		//문자열에 있는 데이터를 배열로 옮겨온것
+const wchar_t* pChar = L"abcdef";		// L"abcdef" = 주소값
+wchar_t* ppChar = L"abcdef";
+
+short arrShort[10] = { 97, 98, 99, 100, 101, 102, };
+
+szWChar[1] = 'z';
+// pChar[1] = 'z';				// const포인터 변경안됨
+ppChar[1] = 'z'; 				// 런타임 에러 -> "abcdef"같은 문자열은 읽기 데이터 영역에 있는데 이것을 수정 -> 코드영역이 수정된다.
+
+int a = 0;

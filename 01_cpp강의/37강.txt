@@ -1,0 +1,29 @@
+37강. 문자열(3)
+// 문자열 길이
+// 문자열 이어 붙이기
+unsigned int GetLength(const wchar_t* _pStr){
+	
+	// 문자 개수 채크 용도
+	int i = 0;
+	while('\0' != _pStr[i]){
+		++i;
+	}
+	return i;
+}
+
+unsigned int
+
+
+int main(){
+	wchar_t szName[10] = L"Raimond";
+	
+
+	//int iLen = wcslen(szName);
+	int iLen = GetLength(szName);
+
+	// 문자열 이어 붙이기
+	wscat_s();
+
+	return 0;
+
+}

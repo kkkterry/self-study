@@ -1,0 +1,22 @@
+33강. void
+
+//1. 원본의 자료형을 정하지 않음
+      -> 어떠한 타입의 변수라도 참조가 가능
+      -> 역참조 불가능
+      -> 주소 연산 불가능
+
+void* pVoid = nullptr;	// 어떤 변수의 주소든지 받을수 가 있다.
+float* pFloat = nullptr;
+
+int a = 0;
+float b = 0.f'
+double c = 0.;
+long long d = 0;
+
+pVoid = &a;
+pVoid = &b;
+pVoid = &c;
+pVoid = &d;
+
+// *pVoid;  	불가능
+// pVoid + 1;	

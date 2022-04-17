@@ -1,0 +1,93 @@
+38강-39강. 문자열(4-5)
+
+#include <assert.h>			//매크로 함수
+
+unsigned int GetLength(const wchar_t* _pStr){
+	
+	// 문자 개수 채크 용도
+	int i = 0;
+	while('\0' != _pStr[i]){
+		++i;
+	}
+	return i;
+}
+
+// 함수의 오버로딩: 인자가 다를경우 함수의 이름이 같아도 구분한다.
+void Test(int a){
+	
+}
+
+void Test(float a){
+
+}
+
+void StrCat(wchar_t* _pDest, unsigned int _iBufferSize, const wchar_t* _pSrc){
+	
+	// 예외처리
+	// 이어붙인 최종 문자열 길이가, 원본 저장공간을 넘어서려는 경우
+	int iDestLen = GetLength(_pDest);
+	int iSrcLen = GetLength(_pSrc);	
+
+	if (_iBufferSize < iDestLen + iSrcLen +1){ // null 문자 공간까지 계산
+		assert(nullptr);
+	}
+	
+	// 문자열 이어 붙이기
+	// 1. 원본 문자열의 끝을 확인(문자열을 이어 붙일 시작 위치)
+	iDestLen; // Dest 문자열의 끝 인덱스
+	
+	// 2. 반복적으로 Src 문자열을 Dest 끝 위치에 복사하기
+	// 3. Src 문자열의 끝을 만나면 반복 종료
+	for (int i = 0; i<iSrcLen+1; i++){
+		_pDest[iDestLen + i] = _pSrc[i];
+	}
+}
+
+int StrCmp(const wchar_t* _left, const wchar_t* _right){
+
+	int leftLen = GetLength(_left);
+	int rightLen = GetLength(_right);
+
+	int iLoop = 0;
+	int iReturn = 0;
+
+	if(leftLen < rightLen){
+		iLoop = leftLen;
+		iReturn = -1;
+	}
+	else if(leftLen > rightLen){
+		iLoop = rightLen;
+		iReturn = 1;
+	}
+	
+	for(int i = 0 ; i< iLoop ; i++){
+		if(_left[i] < _right[i]){
+			return -1;
+		}
+		else if(_left[i] > _right[i]){
+			return 1;
+		}
+	}
+	
+	return iReturn;
+}
+
+
+
+int main(){
+	wchar_t szName[10] = L"Raimond";
+	
+	//int iLen = wcslen(szName);
+	int iLen = GetLength(szName);
+
+	// 함수의 오버라이딩
+	Test(10)
+	Test(4.15f)
+
+	// 문자열 이어 붙이기
+	wchar_t szString[100] = L'abc';
+	wscat_s(szString, 100, L"def");
+	StrCat(szString, 100, L"abc");
+
+	return 0;
+}
