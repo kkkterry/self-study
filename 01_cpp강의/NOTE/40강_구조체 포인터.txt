@@ -1,0 +1,12 @@
+40강. 구조체 포인터
+
+a -> b 는 (*a).b
+
+MYST -> int a, float f;
+
+MYST s = {};
+MYST* pST = &s;	//구조체 포인터
+
+pST-> a = 100	//(*pST).a = 100;
+pST-> f = 3.14	//(*pST).f = 3.14f;
+
