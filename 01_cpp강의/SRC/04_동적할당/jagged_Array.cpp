@@ -1,4 +1,5 @@
 #include <iostream>
+#include<time.h>
 #include "Arr.h"
 //가변배열
 //int g_i = 100;
