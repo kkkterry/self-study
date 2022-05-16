@@ -1,0 +1,4 @@
+60강. iterator
+
+- 선언 : vector<int>::iterator 변수명 = 변수명.begin();
+- *이터래이터 변수명 // 포인터와 같다.

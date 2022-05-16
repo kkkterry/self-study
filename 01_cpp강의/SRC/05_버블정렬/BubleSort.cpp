@@ -15,23 +15,27 @@ void Sort(tArr* _pArr){
 		return;
 
 	// 오름차순 정렬
+	int Circle_Count = 1;
 	while (true) {
 
 		bool bFinish = true;
 
-		for (int i = 0; i < _pArr->iCount - 1; ++i) {
-			if (_pArr->pInt[i] < _pArr->pInt[i + 1]) {
+		for (int i = 0; i < _pArr->iCount - Circle_Count; ++i) {
+			if (_pArr->pInt[i] > _pArr->pInt[i + 1]) {
+
 				int iTemp = _pArr->pInt[i];
 				_pArr->pInt[i] = _pArr->pInt[i + 1];
 				_pArr->pInt[i + 1] = iTemp;
 
-				bFinish = false;
-
 			}
+			
 		}
+		
+		Circle_Count++;
 
-		if (bFinish)
+		if (not(bFinish) * (_pArr->iCount - Circle_Count == -1))
 			break;
+
 	}
 }
 
